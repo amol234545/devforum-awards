@@ -1,0 +1,63 @@
+<head>
+  <script type="module" src="/components/Header.js"></script>
+  <script type="module" src="/components/Navigation.js"></script>
+
+  <script type="module">
+    import 'material/card/card.js';
+    import 'material/buttons/button.js';
+    import 'material/icon/icon.js';
+    import 'material/list/list.js'
+    import 'material/list/list-item.js'
+    import 'material/radio/radio.js'
+  </script>
+</head>
+
+<body>
+  <md-card>
+    <h2 style="text-align: center; padding-top: 1px">
+      Devforum Awards 2026
+    </h2>
+  </md-card>
+
+  <div style="display: flex; justify-content: space-between">
+    <h2 style="font-weight: 250; padding-top: 1px; padding-left: 10px">
+      Vote for your...
+    </h2>
+    <div style="padding-top: 12px; padding-right: 12px;">
+      <md-button size="medium" color="tonal" has-icon trailing-icon>
+        <md-icon slot="icon">star</md-icon>
+        Vote!
+      </md-button>
+    </div>
+  </div>
+  <h1 style="font-weight: 100; padding-top: 1px; padding-left: 10px">
+    Best Devforum User!
+  </h1>
+  <md-list>
+    <md-list-item type="text">
+      <img slot="start" src="./avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;" />
+      <div slot="headline">Two-line item</div>
+      <div slot="supporting-text">Supporting text goes here</div>
+      <md-radio name="group" style="position: absolute; right: 10; "value="1"></md-radio>
+    </md-list-item>
+    <md-list-item type="text">
+      <img slot="start" src="./avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;" />
+      <div slot="headline">Two-line item</div>
+      <div slot="supporting-text">Supporting text goes here</div>
+      <md-radio name="group" style="position: absolute; right: 10;" value="2"></md-radio>
+    </md-list-item>
+    <md-list-item type="text">
+      <img slot="start" src="./avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;" />
+      <div slot="headline">Two-line item</div>
+      <div slot="supporting-text">Supporting text goes here</div>
+      <md-radio name="group" style="position: absolute; right: 10;" value="3"></md-radio>
+    </md-list-item>
+    <md-list-item type="text">
+      <img slot="start" src="./avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;" />
+      <div slot="headline">Two-line item</div>
+      <div slot="supporting-text">Supporting text goes here</div>
+      <md-radio name="group" style="position: absolute; right: 10;" value="4"></md-radio>
+    </md-list-item>
+  </md-list>
+  <app-navigation page="Voting"></app-navigation>
+</body>
