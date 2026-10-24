@@ -5,7 +5,6 @@ const fastify = Fastify({ logger: true });
 const decoder = new TextDecoder();
 const env = dotenv.parse(decoder.decode(Deno.readFileSync("./.env")));
 const DEVFORUM_TOKEN = env["DEVFORUM_TOKEN"];
-console.log(DEVFORUM_TOKEN);
 const importMap = `
 <script type="importmap">
 {
@@ -83,5 +82,20 @@ fastify.get("/components/:path", {}, (request, reply) => {
     "./src/components/" + request.params["path"],
   );
 });
+
+fastify.get("/assets/:path", {}, (request) => {
+  // no header here; the browser can figure it out
+  return Deno.readFileSync(
+    "./src/assets/" + request.params["path"],
+  );
+});
+
+fastify.get("/themes/:path", {}, (request, reply) => {
+  reply.type("text/css");
+  return Deno.readFileSync(
+    "./src/themes/" + request.params["path"],
+  );
+});
+
 
 await fastify.listen({ port: 8000 });

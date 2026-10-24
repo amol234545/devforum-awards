@@ -5,6 +5,8 @@
   <script type="module" src="/components/Navigation.js"></script>
   <script type="module">
     import 'material/card/card.js'
+    globalThis.categories = await (await fetch(new URL(location.href).origin + "/assets/categories.json")).json()
+    console.log(categories)
   </script>
 </head>
 
@@ -13,5 +15,4 @@
     <h2 style="text-align: center; padding-top: 1px"> Devforum Awards 2026 </h2>
   </md-card>
   <app-navigation page="Categories" />
-
 </html>
