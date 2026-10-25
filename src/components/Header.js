@@ -32,3 +32,11 @@ style.textContent = `
 `;
 
 document.head.append(style);
+const card = document.createElement("md-card");
+card.style = "position: fixed"
+card.innerHTML = `
+  <h2 style="text-align: center; padding-top: 1px">
+        DevForum Awards 2026
+  </h2>
+`
+document.body.append(card);
