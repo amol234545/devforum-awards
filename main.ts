@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import dotenv from "dotenv";
+import * as path from "node:path"
 
 const fastify = Fastify({ logger: true });
 const decoder = new TextDecoder();
@@ -22,6 +23,20 @@ const importMap = `
 }
 </script>
 `;
+
+
+function safeResolve(baseDir: string, userInput: string) {
+  // 1. Resolve to an absolute path to eliminate '.' and '..'
+  const absoluteBase = path.resolve(baseDir);
+  const absoluteTarget = path.resolve(baseDir, userInput);
+
+  // 2. Check if the target path starts with the base directory path
+  if (!absoluteTarget.startsWith(absoluteBase)) {
+    throw new Error("Directory traversal attempt detected!");
+  }
+
+  return absoluteTarget;
+}
 
 function servePage(path: string) {
   let file = decoder.decode(Deno.readFileSync(path));
@@ -73,27 +88,27 @@ fastify.get("/is_devforum_user/:id", async (request, reply) => {
 
 fastify.get("/:page", {}, (request, reply) => {
   reply.type("text/html");
-  return servePage(`./src/pages/${request.params["page"]}.html`);
+  return servePage(safeResolve(`./src/pages/`,request.params["page"]+".html"));
 });
 
 fastify.get("/components/:path", {}, (request, reply) => {
   reply.type("text/javascript");
   return Deno.readFileSync(
-    "./src/components/" + request.params["path"],
+    safeResolve(`./src/components/`,request.params["page"]+".js"),
   );
 });
 
 fastify.get("/assets/:path", {}, (request) => {
   // no header here; the browser can figure it out
   return Deno.readFileSync(
-    "./src/assets/" + request.params["path"],
+    safeResolve(`./src/assets/`,request.params["page"]),
   );
 });
 
 fastify.get("/themes/:path", {}, (request, reply) => {
   reply.type("text/css");
   return Deno.readFileSync(
-    "./src/themes/" + request.params["path"],
+    safeResolve(`./src/assets/`,request.params["page"]+".css"),
   );
 });
 
