@@ -18,24 +18,31 @@ class Navigation extends LitElement {
   static styles = css`
     :host {
       display: block;
+      box-sizing: border-box;
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       width: 100%;
       z-index: 1000;
-      --md-navigation-bar-container-height: 80px;
+      height: calc(var(--app-nav-height, 80px) + env(safe-area-inset-bottom, 0px));
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      background: var(--md-sys-color-surface-container, #f7f3fb);
+      box-shadow: 0 -2px 16px rgb(32 24 40 / 8%);
     }
 
     .layout-container {
       width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
     }
 
     md-nav-bar {
       display: block;
       width: 100%;
-      --md-navigation-bar-container-height: 80px;
-      --_container-height: 80px;
+      height: var(--app-nav-height, 80px);
+      --md-navigation-bar-container-height: var(--app-nav-height, 80px);
+      --_container-height: var(--app-nav-height, 80px);
     }
   `;
 
@@ -45,7 +52,7 @@ class Navigation extends LitElement {
       { label: "Categories", icon: "category", href: "/categories" },
       { label: "Voting", icon: "how_to_vote", href: "/voting"},
       { label: "Results", icon: "bar_chart", href: "/results" },
-      { label: "Profile", icon: "account_circle" },
+      { label: "Profile", icon: "account_circle", href: "/profile" },
     ];
 
     const activeIndex = items.findIndex(

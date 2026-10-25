@@ -60,10 +60,16 @@ function servePage(path: string) {
 
   return file;
 }
+const index_page = servePage("./src/pages/index.html")
+
+fastify.setNotFoundHandler((_, reply) => {
+  reply.code(404).type("text/html");
+  return servePage("./src/pages/not-found.html");
+});
 
 fastify.get("/", {}, (_, reply) => {
   reply.type("text/html");
-  return servePage("./src/pages/index.html");
+  return index_page;
 });
 
 fastify.get("/is_devforum_user/:id", async (request, reply) => {
@@ -104,7 +110,10 @@ fastify.get("/:page", {}, async (request, reply) => {
     "./src/pages",
     `${request.params["page"]}.html`,
   );
-  if (!file) return reply.code(404).send({ error: "Not found" });
+  if (!file) {
+    reply.code(404).type("text/html");
+    return servePage("./src/pages/not-found.html");
+  }
 
   reply.type("text/html");
   return servePage(file);
@@ -112,7 +121,10 @@ fastify.get("/:page", {}, async (request, reply) => {
 
 fastify.get("/components/:path", {}, async (request, reply) => {
   const file = await safeResolve("./src/components", request.params["path"]);
-  if (!file) return reply.code(404).send({ error: "Not found" });
+  if (!file) {
+    reply.code(404).type("text/html");
+    return servePage("./src/pages/not-found.html");
+  }
 
   reply.type("text/javascript");
   return Deno.readFileSync(file);
@@ -120,7 +132,10 @@ fastify.get("/components/:path", {}, async (request, reply) => {
 
 fastify.get("/assets/:path", {}, async (request, reply) => {
   const file = await safeResolve("./src/assets", request.params["path"]);
-  if (!file) return reply.code(404).send({ error: "Not found" });
+  if (!file) {
+    reply.code(404).type("text/html");
+    return servePage("./src/pages/not-found.html");
+  }
 
   const contentType = file.endsWith(".png")
     ? "image/png"
@@ -132,7 +147,10 @@ fastify.get("/assets/:path", {}, async (request, reply) => {
 
 fastify.get("/themes/:path", {}, async (request, reply) => {
   const file = await safeResolve("./src/themes", request.params["path"]);
-  if (!file) return reply.code(404).send({ error: "Not found" });
+  if (!file) {
+    reply.code(404).type("text/html");
+    return servePage("./src/pages/not-found.html");
+  }
 
   reply.type("text/css");
   return Deno.readFileSync(file);

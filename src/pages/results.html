@@ -1,15 +1,19 @@
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="/themes/base.css">
+  <link rel="stylesheet" href="/themes/results.css">
   <script type="module" src="/components/Header.js"></script>
   <script type="module" src="/components/Navigation.js"></script>
 </head>
 
 <body>
-  <div
-    style="position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; pointer-events: none;">
-    <span style="font-size: 40;">Results haven't been announced yet.</span>
-  </div>
+  <main class="page-shell results-page">
+    <p class="results-message">Results haven't been announced yet.</p>
+  </main>
   <app-navigation page="Results"></app-navigation>
 </body>
 

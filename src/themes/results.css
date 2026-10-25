@@ -1,0 +1,21 @@
+.results-page {
+  display: grid;
+  min-height: min(52vh, 480px);
+  place-items: center;
+  padding: 20px 4px;
+  text-align: center;
+}
+
+.results-message {
+  max-width: 28ch;
+  margin: 0;
+  font-size: clamp(1.45rem, 4.5vw, 2.5rem);
+  line-height: 1.3;
+}
+
+@media (max-width: 480px) {
+  .results-page {
+    min-height: 44vh;
+    padding-inline: 8px;
+  }
+}

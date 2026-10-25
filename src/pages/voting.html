@@ -1,4 +1,10 @@
+<!doctype html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="/themes/base.css">
+  <link rel="stylesheet" href="/themes/voting.css">
   <script type="module" src="/components/Header.js"></script>
   <script type="module" src="/components/Navigation.js"></script>
   <script type="module" src="/components/VotingList.js"></script>
@@ -9,23 +15,21 @@
 </head>
 
 <body>
-
-
-  <div style="display: flex; justify-content: space-between">
-    <h2 style="font-weight: 250; padding-top: 1px; padding-left: 10px">
-      Vote for your...
-    </h2>
-    <div style="padding-top: 12px; padding-right: 12px;">
-      <md-button size="medium" color="tonal" has-icon trailing-icon>
-        <md-icon slot="icon">star</md-icon>
-        Vote!
-      </md-button>
-    </div>
-  </div>
-  <h1 style="font-weight: 100; padding-top: 1px; padding-left: 10px">
-    Best Devforum User!
-  </h1>
-  <voting-list id="voting-list"></voting-list>
+  <main class="page-shell">
+    <section class="vote-header">
+      <div class="vote-heading">
+        <h2>Vote for your...</h2>
+        <h1>Best Devforum User!</h1>
+      </div>
+      <div class="vote-button-wrap">
+        <md-button size="medium" color="tonal" has-icon trailing-icon>
+          <md-icon slot="icon">star</md-icon>
+          Vote!
+        </md-button>
+      </div>
+    </section>
+    <voting-list id="voting-list"></voting-list>
+  </main>
 
   <script type="module">
     const list = document.querySelector("#voting-list");
@@ -63,3 +67,4 @@
   </script>
   <app-navigation page="Voting"></app-navigation>
 </body>
+</html>

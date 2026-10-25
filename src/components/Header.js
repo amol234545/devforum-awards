@@ -12,27 +12,6 @@ for (const href of fonts) {
   }
 }
 
-const style = document.createElement("style");
-style.textContent = `
-  :root {style
-    --md-ref-typeface-brand: "Google Sans Flex", sans-serif;
-    --md-ref-typeface-plain: "Google Sans Flex", sans-serif;
-    font-family: var(--md-ref-typeface-plain);
-    font-size: 14px;
-  }
-
-  body {
-    margin: 0;
-    font-family: var(--md-ref-typeface-plain);
-  }
-
-  button, input, textarea, select {
-    font: inherit;
-  }
-`;
-
-document.head.append(style);
-
 const card_import = document.createElement("script");
 
 card_import.type = "module";

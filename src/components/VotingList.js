@@ -2,9 +2,60 @@ import "material/list/list.js";
 import "material/list/list-item.js";
 import "material/radio/radio.js";
 
-import { html, LitElement } from "lit";
+import { css, html, LitElement } from "lit";
 
 class VotingList extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+      width: 100%;
+      min-width: 0;
+    }
+
+    md-list {
+      width: 100%;
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    md-list-item {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .avatar {
+      display: block;
+      width: clamp(48px, 13vw, 72px);
+      height: clamp(48px, 13vw, 72px);
+      flex: 0 0 auto;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .headline,
+    .supporting {
+      display: block;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .headline {
+      font-size: clamp(1rem, 2.5vw, 1.125rem);
+      line-height: 1.3;
+    }
+
+    .supporting {
+      font-size: 0.875rem;
+      line-height: 1.35;
+    }
+
+    md-radio {
+      flex: 0 0 auto;
+      margin-inline: 4px;
+    }
+  `;
+
   static properties = {
     categories: { type: Array },
     selected: { type: String },
@@ -29,14 +80,14 @@ class VotingList extends LitElement {
                 slot="start"
                 src=${category.avatar || "./assets/avatar.png"}
                 alt="Avatar"
-                style="width: 100px; height: 100px; border-radius: 50%;"
+                class="avatar"
               />
 
-              <div slot="headline" style="font-size: medium;">
+              <div slot="headline" class="headline">
                 ${name}
               </div>
 
-              <div slot="supporting-text" style="font-size: small;">
+              <div slot="supporting-text" class="supporting">
                 ${category.description || category.supportingText || ""}
               </div>
 
@@ -45,7 +96,6 @@ class VotingList extends LitElement {
                 name="group"
                 value=${value}
                 ?checked=${this.selected === value}
-                style="position: absolute; right: 10px;"
                 @change=${() => {
                   this.selected = value;
 

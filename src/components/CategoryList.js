@@ -1,7 +1,7 @@
 import "material/list/list.js";
 import "material/list/list-item.js";
 
-import { html, LitElement } from "lit";
+import { css, html, LitElement } from "lit";
 
 function generateCohesivePalette(colorCount = 5) {
   const palette = [];
@@ -18,10 +18,6 @@ function generateCohesivePalette(colorCount = 5) {
   return palette;
 }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -32,6 +28,32 @@ function shuffle(array) {
 
 
 class CategoryList extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+      min-width: 0;
+    }
+
+    .layout-container {
+      width: 100%;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+
+    md-list {
+      width: 100%;
+      padding: 0;
+    }
+
+    .category-name {
+      display: block;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      line-height: 1.3;
+    }
+  `;
+
   static properties = {
     categories: { type: Array },
   };
@@ -54,11 +76,11 @@ class CategoryList extends LitElement {
                   style="--md-list-item-label-text-color: ${palette[index]}"
                   type="text"
                 >
-                  <div slot="headline"><span style=${`font-size: ${getRandomInt(16,24)}px`}>${category}</span></div>
+                  <div slot="headline"><span class="category-name">${category}</span></div>
                 </md-list-item>
               `,
           )}
-        </md-list>s
+        </md-list>
       </div>
     `;
   }

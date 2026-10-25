@@ -1,0 +1,96 @@
+:root {
+  --md-ref-typeface-brand: "Google Sans Flex", system-ui, sans-serif;
+  --md-ref-typeface-plain: "Google Sans Flex", system-ui, sans-serif;
+  --app-nav-height: 80px;
+  font-family: var(--md-ref-typeface-plain);
+  font-size: 16px;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0 0 calc(var(--app-nav-height) + env(safe-area-inset-bottom, 0px));
+  overflow-x: hidden;
+  font-family: var(--md-ref-typeface-plain);
+  line-height: 1.5;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+md-card {
+  display: block;
+  width: calc(100% - 24px);
+  max-width: 960px;
+  margin: 12px auto;
+  padding: 4px clamp(12px, 4vw, 24px);
+}
+
+md-card h2 {
+  margin: 0.25em 0;
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  line-height: 1.25;
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px clamp(12px, 3vw, 24px) 28px;
+}
+
+@media (min-width: 768px) {
+  .page-shell {
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --app-nav-height: 72px;
+  }
+
+  md-card {
+    width: calc(100% - 16px);
+    margin: 8px auto;
+  }
+
+  .page-shell {
+    padding: 12px 12px 24px;
+  }
+}
