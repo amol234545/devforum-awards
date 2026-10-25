@@ -1,14 +1,10 @@
 <head>
   <script type="module" src="/components/Header.js"></script>
   <script type="module" src="/components/Navigation.js"></script>
-
+  <script type="module" src="/components/VotingList.js"></script>
   <script type="module">
-    import 'material/card/card.js';
     import 'material/buttons/button.js';
     import 'material/icon/icon.js';
-    import 'material/list/list.js'
-    import 'material/list/list-item.js'
-    import 'material/radio/radio.js'
   </script>
 </head>
 
@@ -29,31 +25,41 @@
   <h1 style="font-weight: 100; padding-top: 1px; padding-left: 10px">
     Best Devforum User!
   </h1>
-  <md-list>
-    <md-list-item type="text">
-      <img slot="start" src="./assets/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%;" />
-      <div slot="headline">Two-line item</div>
-      <div slot="supporting-text">Supporting text goes here</div>
-      <md-radio name="group" style="position: absolute; right: 10; " value="1"></md-radio>
-    </md-list-item>
-    <md-list-item type="text">
-      <img slot="start" src="./assets/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%;" />
-      <div slot="headline">Two-line item</div>
-      <div slot="supporting-text">Supporting text goes here</div>
-      <md-radio name="group" style="position: absolute; right: 10;" value="2"></md-radio>
-    </md-list-item>
-    <md-list-item type="text">
-      <img slot="start" src="./assets/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%;" />
-      <div slot="headline">Two-line item</div>
-      <div slot="supporting-text">Supporting text goes here</div>
-      <md-radio name="group" style="position: absolute; right: 10;" value="3"></md-radio>
-    </md-list-item>
-    <md-list-item type="text">
-      <img slot="start" src="./assets/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%;" />
-      <div slot="headline">Two-line item</div>
-      <div slot="supporting-text">Supporting text goes here</div>
-      <md-radio name="group" style="position: absolute; right: 10;" value="4"></md-radio>
-    </md-list-item>
-  </md-list>
+  <voting-list id="voting-list"></voting-list>
+
+  <script type="module">
+    const list = document.querySelector("#voting-list");
+
+    list.categories = [
+      {
+        id: "1",
+        username: "User One",
+        description: "Supporting text goes here",
+        avatar: "./assets/avatar.png",
+      },
+      {
+        id: "2",
+        username: "User Two",
+        description: "Supporting text goes here",
+        avatar: "./assets/avatar.png",
+      },
+      {
+        id: "3",
+        username: "User Three",
+        description: "Supporting text goes here",
+        avatar: "./assets/avatar.png",
+      },
+      {
+        id: "4",
+        username: "User Four",
+        description: "Supporting text goes here",
+        avatar: "./assets/avatar.png",
+      },
+    ];
+
+    list.addEventListener("vote-change", (event) => {
+      console.log("Selected vote:", event.detail.selected);
+    });
+  </script>
   <app-navigation page="Voting"></app-navigation>
 </body>

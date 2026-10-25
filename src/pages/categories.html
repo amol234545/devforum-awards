@@ -5,8 +5,6 @@
   <script type="module" src="/components/Navigation.js"></script>
   <script type="module" src="/components/CategoryList.js"></script>
   <script type="module">
-    import "material/card/card.js";
-
     const response = await fetch("/assets/categories.json");
     const categories = await response.json();
 

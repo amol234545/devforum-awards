@@ -14,7 +14,7 @@ for (const href of fonts) {
 
 const style = document.createElement("style");
 style.textContent = `
-  :root {
+  :root {style
     --md-ref-typeface-brand: "Google Sans Flex", sans-serif;
     --md-ref-typeface-plain: "Google Sans Flex", sans-serif;
     font-family: var(--md-ref-typeface-plain);
@@ -32,10 +32,20 @@ style.textContent = `
 `;
 
 document.head.append(style);
+
+const card_import = document.createElement("script");
+
+card_import.type = "module";
+card_import.innerText = `
+  import "material/card/card.js";
+`;
+document.head.append(card_import);
+
 const card = document.createElement("md-card");
+
 card.innerHTML = `
   <h2 style="text-align: center; padding-top: 1px">
         DevForum Awards 2026
   </h2>
-`
+`;
 document.body.prepend(card);
