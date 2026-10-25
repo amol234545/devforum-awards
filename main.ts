@@ -1,6 +1,6 @@
 import Fastify from "fastify";
 import dotenv from "dotenv";
-import * as path from "node:path"
+import * as path from "node:path";
 
 const fastify = Fastify({ logger: true });
 const decoder = new TextDecoder();
@@ -24,18 +24,31 @@ const importMap = `
 </script>
 `;
 
+async function safeResolve(baseDir: string, userInput: string) {
+  try {
+    const absoluteBase = await Deno.realPath(baseDir);
+    const absoluteTarget = await Deno.realPath(
+      path.resolve(absoluteBase, userInput),
+    );
+    const targetInfo = await Deno.stat(absoluteTarget);
+    if (!targetInfo.isFile) return null;
 
-function safeResolve(baseDir: string, userInput: string) {
-  // 1. Resolve to an absolute path to eliminate '.' and '..'
-  const absoluteBase = path.resolve(baseDir);
-  const absoluteTarget = path.resolve(baseDir, userInput);
+    const relativeTarget = path.relative(absoluteBase, absoluteTarget);
 
-  // 2. Check if the target path starts with the base directory path
-  if (!absoluteTarget.startsWith(absoluteBase)) {
-    throw new Error("Directory traversal attempt detected!");
+    if (
+      relativeTarget === "" ||
+      relativeTarget === "." ||
+      relativeTarget === ".." ||
+      relativeTarget.startsWith(`..${path.sep}`) ||
+      path.isAbsolute(relativeTarget)
+    ) {
+      return null;
+    }
+
+    return absoluteTarget;
+  } catch {
+    return null;
   }
-
-  return absoluteTarget;
 }
 
 function servePage(path: string) {
@@ -86,30 +99,43 @@ fastify.get("/is_devforum_user/:id", async (request, reply) => {
   }
 });
 
-fastify.get("/:page", {}, (request, reply) => {
+fastify.get("/:page", {}, async (request, reply) => {
+  const file = await safeResolve(
+    "./src/pages",
+    `${request.params["page"]}.html`,
+  );
+  if (!file) return reply.code(404).send({ error: "Not found" });
+
   reply.type("text/html");
-  return servePage(safeResolve(`./src/pages/`,request.params["page"]+".html"));
+  return servePage(file);
 });
 
-fastify.get("/components/:path", {}, (request, reply) => {
+fastify.get("/components/:path", {}, async (request, reply) => {
+  const file = await safeResolve("./src/components", request.params["path"]);
+  if (!file) return reply.code(404).send({ error: "Not found" });
+
   reply.type("text/javascript");
-  return Deno.readFileSync(
-    safeResolve(`./src/components/`,request.params["page"]+".js"),
-  );
+  return Deno.readFileSync(file);
 });
 
-fastify.get("/assets/:path", {}, (request) => {
-  // no header here; the browser can figure it out
-  return Deno.readFileSync(
-    safeResolve(`./src/assets/`,request.params["page"]),
-  );
+fastify.get("/assets/:path", {}, async (request, reply) => {
+  const file = await safeResolve("./src/assets", request.params["path"]);
+  if (!file) return reply.code(404).send({ error: "Not found" });
+
+  const contentType = file.endsWith(".png")
+    ? "image/png"
+    : file.endsWith(".json")
+    ? "application/json"
+    : "application/octet-stream";
+  return reply.type(contentType).send(Deno.readFileSync(file));
 });
 
-fastify.get("/themes/:path", {}, (request, reply) => {
+fastify.get("/themes/:path", {}, async (request, reply) => {
+  const file = await safeResolve("./src/themes", request.params["path"]);
+  if (!file) return reply.code(404).send({ error: "Not found" });
+
   reply.type("text/css");
-  return Deno.readFileSync(
-    safeResolve(`./src/assets/`,request.params["page"]+".css"),
-  );
+  return Deno.readFileSync(file);
 });
 
 
