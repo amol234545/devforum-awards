@@ -1,27 +1,24 @@
 <html>
-  <head>
-    <script type="module" src="/components/Header.js"></script>
-    <script type="module" src="/components/Navigation.js"></script>
-    <script type="module" src="/components/CategoryList.js"></script>
-    <script type="module">
-      import "material/card/card.js";
 
-      const response = await fetch("/assets/categories.json");
-      const categories = await response.json();
+<head>
+  <script type="module" src="/components/Header.js"></script>
+  <script type="module" src="/components/Navigation.js"></script>
+  <script type="module" src="/components/CategoryList.js"></script>
+  <script type="module">
+    import "material/card/card.js";
 
-      await customElements.whenDefined("category-list");
-      document.querySelector("category-list").categories = categories;
-    </script>
-  </head>
+    const response = await fetch("/assets/categories.json");
+    const categories = await response.json();
 
-  <body>
-    <md-card>
-      <h2 style="text-align: center; padding-top: 1px">
-        DevForum Awards 2026
-      </h2>
-    </md-card>
-    <br/>
-    <category-list></category-list>
-    <app-navigation page="Categories"></app-navigation>
-  </body>
+    await customElements.whenDefined("category-list");
+    document.querySelector("category-list").categories = categories;
+  </script>
+</head>
+
+<body>
+  <br />
+  <category-list></category-list>
+  <app-navigation page="Categories"></app-navigation>
+</body>
+
 </html>
