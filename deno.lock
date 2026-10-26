@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@fastify/rate-limit@^11.2.1": "11.2.1",
     "npm:@fingerprintjs/fingerprintjs@^5.3.0": "5.3.0",
     "npm:dotenv@*": "18.0.9",
     "npm:dotenv@^18.0.9": "18.0.9",
@@ -44,6 +45,15 @@
         "ipaddr.js"
       ]
     },
+    "@fastify/rate-limit@11.2.1": {
+      "integrity": "sha512-uTQjii3tJUnb6ZyEMcunuvKE3FDKNZEaPpxdyWADDgthHnUV1swdvwuiZfi3DDDgxm1iBrhOkQ/w0yDBQ8qJtA==",
+      "dependencies": [
+        "@lukeed/ms",
+        "fastify-plugin",
+        "ip-address",
+        "toad-cache"
+      ]
+    },
     "@fingerprintjs/fingerprintjs@5.3.0": {
       "integrity": "sha512-goxeuSCF/LR8E/lcsCh/YTjhlFW7AOhj4A9RQ5GHpBOKwkX/OG3z8mY5ADR1xGVRB5bSEJB66WNh5eBwehx2nQ=="
     },
@@ -55,6 +65,9 @@
       "dependencies": [
         "@lit-labs/ssr-dom-shim"
       ]
+    },
+    "@lukeed/ms@2.0.2": {
+      "integrity": "sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA=="
     },
     "@pinojs/redact@0.4.0": {
       "integrity": "sha512-k2ENnmBugE/rzQfEcdWHcCY+/FM3VLzH9cYEsbdsoqrvzAKRhUZeRNhAZvB8OitQJ1TBed3yqWtdjzS6wJKBwg=="
@@ -132,6 +145,9 @@
     "fast-uri@4.2.3": {
       "integrity": "sha512-I1PXwP5eAhlNlcdpjt9CgB59op2ZvZfxw+BkqGFVIUOgNpCVTcTqp3HhTX7brxj5vsip+nSY4nTvff+eIA76hg=="
     },
+    "fastify-plugin@6.0.1": {
+      "integrity": "sha512-4wW4RxSmvPXLrh5mgQEiu43qU3bw44N2ss4FTkTkQIbprUhE+/s43QX0j/ttcztdWK7PEkHqVthdc5GdEGDvjA=="
+    },
     "fastify@5.12.7": {
       "integrity": "sha512-v4pEPsTRPuqlDIYiQFB+BHjVN4SdHX9u0ABk0ZDUKbbdY1vsNryUd1j4Z+jQEZajvYIVk047Kimva9/AJ79GYw==",
       "dependencies": [
@@ -165,6 +181,9 @@
         "fast-querystring",
         "safe-regex2"
       ]
+    },
+    "ip-address@10.7.5": {
+      "integrity": "sha512-t2v0rkILYv9WXmSL7TpAaU3HXgaFYOPUcH3QHgwQ++gpJuH3bqyMy4Fvt/DJCTKwzH3Cf+bAp5W/mFL39KPLzA=="
     },
     "ipaddr.js@2.5.0": {
       "integrity": "sha512-aq+t5NAc+cS6rZQQVWC2x98CPqGtKKTMDd4Gaodv0wShnItdKg/51djkGJ1hqH+Oy0ivDftCbSLCQob8zso01w=="
@@ -320,6 +339,7 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@fastify/rate-limit@^11.2.1",
       "npm:@fingerprintjs/fingerprintjs@^5.3.0",
       "npm:dotenv@^18.0.9",
       "npm:fastify@^5.12.7",

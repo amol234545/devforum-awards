@@ -1,8 +1,9 @@
 import Fastify from "fastify";
 import dotenv from "dotenv";
 import * as path from "node:path";
+import rateLimit from "@fastify/rate-limit";
 
-const fastify = Fastify({ logger: true });
+const fastify = Fastify({ trustProxy: true });
 const decoder = new TextDecoder();
 const env = dotenv.parse(decoder.decode(Deno.readFileSync("./.env")));
 const DEVFORUM_TOKEN = env["DEVFORUM_TOKEN"];
@@ -24,6 +25,18 @@ const importMap = `
 }
 </script>
 `;
+
+await fastify.register(rateLimit, {
+  global: false, // Turn off global restriction; configure explicitly per route
+  timeWindow: "1 minute",
+  max: 100, // Default fallback limit
+  addHeaders: {
+    "x-ratelimit-limit": true,
+    "x-ratelimit-remaining": true,
+    "x-ratelimit-reset": true,
+    "retry-after": true,
+  },
+});
 
 async function safeResolve(baseDir: string, userInput: string) {
   try {
@@ -61,7 +74,7 @@ function servePage(path: string) {
 
   return file;
 }
-const index_page = servePage("./src/pages/index.html")
+const index_page = servePage("./src/pages/index.html");
 
 fastify.setNotFoundHandler((_, reply) => {
   reply.code(404).type("text/html");
@@ -73,7 +86,14 @@ fastify.get("/", {}, (_, reply) => {
   return index_page;
 });
 
-fastify.get("/is_devforum_user/:id", async (request, reply) => {
+fastify.get("/is_devforum_user/:id", {
+  config: {
+    rateLimit: {
+      max: 50,
+      timeWindow: "1 minute",
+    },
+  },
+}, async (request, reply) => {
   const id = Number(request.params.id);
   if (!Number.isSafeInteger(id) || id <= 0) {
     return reply.code(400).send({ error: "Invalid user ID" });
@@ -91,7 +111,7 @@ fastify.get("/is_devforum_user/:id", async (request, reply) => {
       `https://devforum.roblox.com/u/${encodeURIComponent(username)}.json`,
       {
         headers: { "Cookie": `_t=${DEVFORUM_TOKEN}` },
-      }
+      },
     );
     if (!profileResponse.ok) return { isDevForumUser: false };
     const profile = await profileResponse.json();
@@ -102,7 +122,9 @@ fastify.get("/is_devforum_user/:id", async (request, reply) => {
     };
   } catch (error) {
     request.log.error(error);
-    return reply.code(502).send({ error: "Failed to communicate with external APIs" });
+    return reply.code(502).send({
+      error: "Failed to communicate with external APIs",
+    });
   }
 });
 
@@ -156,6 +178,5 @@ fastify.get("/themes/:path", {}, async (request, reply) => {
   reply.type("text/css");
   return Deno.readFileSync(file);
 });
-
 
 await fastify.listen({ port: 8000 });
