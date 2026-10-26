@@ -12,6 +12,19 @@
 <body>
 
   <app-navigation page="Home"></app-navigation>
+  <script type="module">
+    import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
+    // Initialize the agent at application startup.
+    const fpPromise = FingerprintJS.load();
+
+    (async () => {
+      // Get the visitor identifier when you need it.
+      const fp = await fpPromise
+      const result = await fp.get()
+      console.log(result.visitorId)
+    })()
+  </script>
 </body>
+
 </html>

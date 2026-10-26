@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@fingerprintjs/fingerprintjs@^5.3.0": "5.3.0",
     "npm:dotenv@*": "18.0.9",
     "npm:dotenv@^18.0.9": "18.0.9",
     "npm:fastify@^5.12.7": "5.12.7",
@@ -42,6 +43,9 @@
         "@fastify/forwarded",
         "ipaddr.js"
       ]
+    },
+    "@fingerprintjs/fingerprintjs@5.3.0": {
+      "integrity": "sha512-goxeuSCF/LR8E/lcsCh/YTjhlFW7AOhj4A9RQ5GHpBOKwkX/OG3z8mY5ADR1xGVRB5bSEJB66WNh5eBwehx2nQ=="
     },
     "@lit-labs/ssr-dom-shim@1.6.0": {
       "integrity": "sha512-VHb0ALPMTlgKjM6yIxxoQNnpKyUKLD04VzeQdsiXkMqkvYlAHxq9glGLmgbb889/1GsohSOAjvQYoiBppXFqrQ=="
@@ -316,6 +320,7 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@fingerprintjs/fingerprintjs@^5.3.0",
       "npm:dotenv@^18.0.9",
       "npm:fastify@^5.12.7",
       "npm:lit@^3.3.3"

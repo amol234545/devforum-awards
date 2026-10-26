@@ -10,6 +10,7 @@ const importMap = `
 <script type="importmap">
 {
   "imports": {
+      "@fingerprintjs/fingerprintjs": "https://openfpcdn.io/fingerprintjs/v5",
     "material/": "https://cdn.jsdelivr.net/gh/material-esm/material@3/",
     "lit": "https://cdn.jsdelivr.net/npm/lit@3.3.3",
     "lit/": "https://cdn.jsdelivr.net/npm/lit@3.3.3/",
