@@ -23,9 +23,11 @@ document.head.append(card_import);
 const card = document.createElement("md-card");
 
 card.innerHTML = `
-  <h3 style="text-align: left;"> made by AudioCreation1 and more</h3>
-  <h2 style="text-align: center; padding-top: 1px">
-        DevForum Awards 2026
-  </h2>
+  <h3 style="text-align: left; margin: 8px 16px 0;">
+  Made by AudioCreation1 and more
+</h3>
+<h2 style="text-align: center; padding-top: 1px; margin-top: 0;">
+  DevForum Awards 2026
+</h2>
 `;
 document.body.prepend(card);
