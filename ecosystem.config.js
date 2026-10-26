@@ -20,7 +20,7 @@ module.exports = {
       host: process.env.DEPLOY_HOST,
       ref: "origin/main",
       repo: "https://github.com/amol234545/devforum-awards",
-      path: "/home/adeep/devforum-awards",
+      path: "~/devforum-awards",
     },
   },
 };
