@@ -6,12 +6,7 @@ module.exports = {
       args: "run --allow-net --allow-env --allow-sys --allow-read main.ts",
       autorestart: true,
       watch: false,
-    },
-    {
-      name: "cf-tunnel",
-      script: "cloudflared",
-      args: "tunnel --no-autoupdate run awards",
-    },
+    }
   ],
 
   deploy: {
