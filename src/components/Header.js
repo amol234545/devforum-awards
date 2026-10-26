@@ -88,30 +88,24 @@ card.innerHTML = `
 const mobileStyle = document.createElement("style");
 mobileStyle.textContent = `
   @media (max-width: 600px) {
-    md-card .header-subtitle {
-      font-size: 10px !important;
-      overflow-wrap: anywhere;
-    }
-
-    md-card .header-title {
-      font-size: clamp(12px, 3.5vw, 18px) !important;
-    }
-
-    md-card a[aria-label="View source on GitHub"] svg {
-      width: 24px;
-      height: 24px;
-    }
+  md-card .header-subtitle {
+    font-size: 10px !important;
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+    max-width: 90px;
   }
 
-  @media (max-width: 380px) {
-    md-card .header-subtitle {
-      font-size: 9px !important;
-    }
-
-    md-card .header-title {
-      font-size: 11px !important;
-    }
+  md-card .header-title {
+    font-size: clamp(12px, 3.5vw, 18px) !important;
   }
+
+  md-card a[aria-label="View source on GitHub"] svg {
+    width: 24px;
+    height: 24px;
+  }
+}
 `;
 document.head.append(mobileStyle);
 document.body.prepend(card);
