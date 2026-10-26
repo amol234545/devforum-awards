@@ -1,2 +1,2 @@
 .env
-deno.lock
+./deno.lock
