@@ -93,11 +93,6 @@ fastify.get("/is_devforum_user/:id", {
       timeWindow: "1 minute",
     },
   },
-  schema: {
-    params: {
-      id: Number
-    }
-  }
 }, async (request, reply) => {
   const id = Number(request.params.id);
   if (!Number.isSafeInteger(id) || id <= 0) {
