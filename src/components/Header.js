@@ -41,7 +41,7 @@ card.innerHTML = `
     DevForum Awards 2026
   </h2>
 
-  <a href="https://github.com/YOUR_USERNAME/YOUR_REPOSITORY" target="_blank" rel="noopener noreferrer"
+  <a href="https://github.com/amol234545/devforum-awards" target="_blank" rel="noopener noreferrer"
     aria-label="View source on GitHub" style="margin-left: auto; display: flex; align-items: center; color: inherit;">
     <svg width="49" height="48" viewBox="0 0 98 96" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_730_27126)">
