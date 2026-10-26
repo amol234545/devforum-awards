@@ -22,12 +22,23 @@ document.head.append(card_import);
 
 const card = document.createElement("md-card");
 
-card.innerHTML = `
-  <h3 style="text-align: left; margin: 8px 16px 0;">
-  Made by AudioCreation1 and more
-</h3>
-<h2 style="text-align: center; padding-top: 1px; margin-top: 0;">
-  DevForum Awards 2026
-</h2>
+card.style.cssText = `
+  padding: 16px 20px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
 `;
+
+card.innerHTML = `
+  <div style="">
+    <h3 style="font-weight: 300; font-size: 14px; margin: 0;">
+      Made by AudioCreation1 and more
+    </h3>
+    <h2 style="position: absolute; left: 50%; transform: translateX(-50%); margin: 0; white-space: nowrap;">
+      DevForum Awards 2026
+    </h2>
+  </div>
+`;
+
 document.body.prepend(card);

@@ -58,13 +58,20 @@ md-card {
   width: calc(100% - 24px);
   max-width: 960px;
   margin: 12px auto;
-  padding: 4px clamp(12px, 4vw, 24px);
+  padding: 16px clamp(12px, 4vw, 24px);
+  box-sizing: border-box;
 }
 
 md-card h2 {
   margin: 0.25em 0;
   font-size: clamp(1.15rem, 3vw, 1.6rem);
   line-height: 1.25;
+}
+
+md-card h3 {
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0;
 }
 
 .page-shell {
