@@ -87,7 +87,7 @@ card.innerHTML = `
 
 const mobileStyle = document.createElement("style");
 mobileStyle.textContent = `
-  @media (max-width: 600px) {
+  @media (max-width: 770px) {
   md-card .header-subtitle {
     font-size: 10px !important;
     white-space: normal;
