@@ -50,7 +50,6 @@ class Navigation extends LitElement {
     const items = [
       { label: "Home", icon: "home" },
       { label: "Categories", icon: "category", href: "/categories" },
-      { label: "Voting", icon: "how_to_vote", href: "/voting"},
       { label: "Results", icon: "bar_chart", href: "/results" },
       { label: "Profile", icon: "account_circle", href: "/profile" },
     ];
