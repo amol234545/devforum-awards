@@ -51,7 +51,6 @@ class Navigation extends LitElement {
       { label: "Home", icon: "home" },
       { label: "Categories", icon: "category", href: "/categories" },
       { label: "Results", icon: "bar_chart", href: "/results" },
-      { label: "Profile", icon: "account_circle", href: "/profile" },
     ];
 
     const activeIndex = items.findIndex(
